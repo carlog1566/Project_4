@@ -70,7 +70,7 @@ public class RevesActionThread extends ActionThread
 
     public void executeApplication()
     {
-        // ADD CODE THAT WILL DO A SINGLE EXECUTION
+        moveDisk(a, b);
     }
 
     /**
@@ -82,8 +82,9 @@ public class RevesActionThread extends ActionThread
     public void moveDisk(Pole from, Pole to)
     {
         Disk toMove = null;
-        
-        // ADD CODE HERE TO MOVE A DISK FROM ONE POLE TO THE OTHER
+
+        toMove = from.removeDisk();
+        to.addDisk(toMove);
 
         movesMade++;
         moveString = "Move #" + movesMade 
@@ -94,7 +95,9 @@ public class RevesActionThread extends ActionThread
         animationPause();            
     }
 
-    
+    public static void towersOfHanoi(int k, Pole from, Pole to, Pole extra) {
+
+    }
     // ADD METHODS HERE
     
     /***************************************************************************
