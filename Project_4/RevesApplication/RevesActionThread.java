@@ -61,7 +61,7 @@ public class RevesActionThread extends ActionThread
         d = new Pole("d", disks);
 
         for (int i = 0; i < disks; i++) {
-            Disk disk = new Disk(1);
+            Disk disk = new Disk(disks - i);
             a.addDisk(disk);
         }
 
@@ -70,7 +70,7 @@ public class RevesActionThread extends ActionThread
 
     public void executeApplication()
     {
-
+        reves(disks, a, d, b, c);
     }
 
     /**
@@ -95,18 +95,39 @@ public class RevesActionThread extends ActionThread
         animationPause();            
     }
 
-    public static void towersOfHanoi(int k, Pole from, Pole to, Pole extra) {
+    public static int computeK(int n) {
+        int k = 1;
+        while (n >= (k*(k+1)/2)) {
+            k++;
+        }
+        return k;
+    }
+    public void towersOfHanoi(int k, Pole from, Pole to, Pole extra) {
         if (k == 0) {
             return;
         }
         else {
             towersOfHanoi(k - 1, from, extra, to);
-            Disk toMove = from.removeDisk();
-            to.addDisk(toMove);
+            moveDisk(from, to);
             towersOfHanoi(k-1, extra, to, from);
         }
     }
-    // ADD METHODS HERE
+
+    public void reves(int n, Pole from, Pole to, Pole extra1, Pole extra2) {
+        if (n == 0) {
+            return;
+        }
+        if (n == 1) {
+            moveDisk(from, to);
+            return;
+        }
+
+        int k = computeK(n);
+        reves(n-k, from, extra1, extra2, to);
+        towersOfHanoi(k, from, to, extra1);
+        reves(n-k, extra1, to, from, extra2);
+
+    }
     
     /***************************************************************************
      * *************************************************************************
