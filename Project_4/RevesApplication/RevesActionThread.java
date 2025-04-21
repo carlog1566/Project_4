@@ -70,7 +70,7 @@ public class RevesActionThread extends ActionThread
 
     public void executeApplication()
     {
-        moveDisk(a, b);
+
     }
 
     /**
@@ -96,7 +96,15 @@ public class RevesActionThread extends ActionThread
     }
 
     public static void towersOfHanoi(int k, Pole from, Pole to, Pole extra) {
-
+        if (k == 0) {
+            return;
+        }
+        else {
+            towersOfHanoi(k - 1, from, extra, to);
+            Disk toMove = from.removeDisk();
+            to.addDisk(toMove);
+            towersOfHanoi(k-1, extra, to, from);
+        }
     }
     // ADD METHODS HERE
     
