@@ -97,7 +97,7 @@ public class RevesActionThread extends ActionThread
 
     public static int computeK(int n) {
         int k = 1;
-        while (n >= (k*(k+1)/2)) {
+        while (n > (k*(k+1)/2)) {
             k++;
         }
         return k;
@@ -106,10 +106,10 @@ public class RevesActionThread extends ActionThread
         if (k == 0) {
             return;
         }
-        else {
+        else if (k > 0){
             towersOfHanoi(k - 1, from, extra, to);
             moveDisk(from, to);
-            towersOfHanoi(k-1, extra, to, from);
+            towersOfHanoi(k - 1, extra, to, from);
         }
     }
 
@@ -124,7 +124,7 @@ public class RevesActionThread extends ActionThread
 
         int k = computeK(n);
         reves(n-k, from, extra1, extra2, to);
-        towersOfHanoi(k, from, to, extra1);
+        towersOfHanoi(k, from, to, extra2);
         reves(n-k, extra1, to, from, extra2);
 
     }
